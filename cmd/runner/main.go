@@ -12,8 +12,8 @@ import (
 
 	"dagger.io/dagger"
 	"github.com/google/go-github/v48/github"
+	"github.com/jlongtine/dagger-experiments/actionsrunner"
 	"github.com/palantir/go-githubapp/githubapp"
-	"github.com/sipsma/dagger-experiments/actionsrunner"
 	"golang.org/x/oauth2"
 )
 

@@ -39,7 +39,7 @@ func Run(ctx context.Context, c *dagger.Client, cfg Config) error {
 		WithExec([]string{"useradd", "runner", "--create-home"})
 
 	runnerDir := base.
-		WithExec([]string{"apt-get", "install", "-y", "curl"}).
+		WithExec([]string{"apt-get", "install", "-y", "curl", "gcc"}).
 		WithMountedDirectory("/opt/runner", c.Directory()).
 		WithWorkdir("/opt/runner").
 		WithExec([]string{"chown", "runner:runner", "/opt/runner"}).

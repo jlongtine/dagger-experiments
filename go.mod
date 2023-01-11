@@ -1,4 +1,4 @@
-module github.com/sipsma/dagger-experiments
+module github.com/jlongtine/dagger-experiments
 
 go 1.19
 
