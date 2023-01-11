@@ -34,12 +34,13 @@ func Run(ctx context.Context, c *dagger.Client, cfg Config) error {
 	runnerURL := "https://github.com/actions/runner/releases/download/v" + runnerVersion + "/" + runnerFilename
 
 	base := c.Container().
-		From("mcr.microsoft.com/dotnet/runtime-deps:6.0").
+		// From("mcr.microsoft.com/dotnet/runtime-deps:6.0").
+		From("ubuntu:focal").
 		WithExec([]string{"apt-get", "update"}).
 		WithExec([]string{"useradd", "runner", "--create-home"})
 
 	runnerDir := base.
-		WithExec([]string{"apt-get", "install", "-y", "lsb-release", "curl", "tar", "unzip", "zip", "apt-transport-https", "ca-certificates", "sudo", "gpg-agent", "software-properties-common", "build-essential", "zlib1g-dev", "zstd", "gettext", "libcurl4-openssl-dev", "inetutils-ping", "jq", "wget", "dirmngr", "openssh-client", "locales", "python3-pip", "python3-setuptools", "python3", "dumb-init", "nodejs", "rsync", "gosu"}).
+		WithExec([]string{"apt-get", "install", "-y", "lsb-release", "curl", "tar", "unzip", "zip", "apt-transport-https", "ca-certificates", "sudo", "gpg-agent", "software-properties-common", "build-essential", "zlib1g-dev", "zstd", "gettext", "libcurl4-openssl-dev", "inetutils-ping", "jq", "wget", "dirmngr", "openssh-client", "locales", "python3-pip", "python3-setuptools", "python3", "dumb-init", "nodejs", "rsync", "gosu", "gcc"}).
 		WithMountedDirectory("/opt/runner", c.Directory()).
 		WithWorkdir("/opt/runner").
 		WithExec([]string{"chown", "runner:runner", "/opt/runner"}).
